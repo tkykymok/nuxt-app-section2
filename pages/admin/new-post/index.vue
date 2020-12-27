@@ -2,13 +2,14 @@
 
   <div class="admin-new-post-page">
     <section class="new-post-form">
-      <AdminPostForm :post="loadedPost" />
+      <AdminPostForm @submit="onSubmitted"/>
     </section>
   </div>
 
 </template>
 
 <script lang="ts">
+import axios from 'axios';
 import {Component, Vue} from 'nuxt-property-decorator';
 import AdminPostForm from '~/components/Admin/AdminPostForm.vue';
 
@@ -19,15 +20,11 @@ import AdminPostForm from '~/components/Admin/AdminPostForm.vue';
   }
 })
 export default class Index extends Vue {
-
-  loadedPost = {
-    author: 'Maximilian',
-    title: 'My awesome Post',
-    content: 'Super amazing, thanks for that!',
-    thumbnailLink: 'https://www.humantrust.co.jp/wp-content/uploads/2019/03/047e142d419cf76ebd8218ce53d73a3b-1.jpg'
+  onSubmitted(postData: any) {
+    axios.post('https://nuxt-blog-cd47a-default-rtdb.firebaseio.com/posts.json', postData)
+      .then(result => console.log(result))
+      .catch(e => console.log(e));
   }
-
-
 }
 </script>
 

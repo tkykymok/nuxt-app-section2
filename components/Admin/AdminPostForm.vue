@@ -42,7 +42,7 @@ export default class AdminPostForm extends Vue {
 
   onSave() {
     // Save the post
-    console.log(this.editedPost);
+    this.$emit('submit', this.editedPost);
   }
 
   onCancel() {

@@ -1,12 +1,11 @@
 <template>
-
   <div class="admin-page">
     <section class="new-post">
       <AppButton @click="$router.push('/admin/new-post')">Create Post</AppButton>
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
-      <PostList isAdmin />
+      <PostList isAdmin :posts="loadedPosts"/>
     </section>
   </div>
 
@@ -16,6 +15,7 @@
 import {Component, Vue} from 'nuxt-property-decorator';
 import PostList from '@/components/Posts/PostList.vue'
 import AppButton from '~/components/UI/AppButton.vue';
+import {Post} from '~/classes/Post';
 
 @Component({
   layout: 'admin',
@@ -25,8 +25,9 @@ import AppButton from '~/components/UI/AppButton.vue';
   }
 })
 export default class Index extends Vue{
-
-
+  get loadedPosts() {
+    return this.$store.getters.loadedPosts;
+  }
 }
 </script>
 

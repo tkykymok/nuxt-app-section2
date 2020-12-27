@@ -3,21 +3,26 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <PostList/>
+    <PostList :posts="loadedPosts"/>
   </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from "nuxt-property-decorator";
 import PostList from '~/components/Posts/PostList.vue';
+import {Post} from '~/classes/Post';
+import {Context} from '@nuxt/types';
+
 
 @Component({
   components: {
     PostList
   }
 })
-export default class index extends Vue {
-
+export default class Index extends Vue {
+  get loadedPosts() {
+    return this.$store.getters.loadedPosts;
+  }
 }
 </script>
 

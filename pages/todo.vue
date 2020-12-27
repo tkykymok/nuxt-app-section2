@@ -1,9 +1,8 @@
 <template>
   <b-container>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div v-for="d in data" :key="d.id">
+      {{ d.title }}
+    </div>
 
     <b-row class="">
       <b-col cols="md-6" offset="md-3">
@@ -34,16 +33,23 @@
 <script lang="ts">
 import {Component, Vue} from "nuxt-property-decorator";
 import {Todo} from '~/classes/todo';
+import axios from 'axios';
 
 @Component
 export default class todo extends Vue {
-
   public todoList: Todo[] = [];
   public todo: Todo = new Todo();
-
   public checkedList: Todo[] = [];
-
   public id: number = 0;
+
+  data: [] = [] ;
+
+  async beforeMount(){
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    this.data = response.data;
+    console.log(response);
+    return
+  }
 
   addTodo() {
     if (this.todo.title.length) {

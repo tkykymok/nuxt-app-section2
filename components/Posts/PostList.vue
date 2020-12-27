@@ -1,25 +1,13 @@
 <template>
   <section class="post-list">
     <PostPreview
-      id="1"
+      v-for="post in posts"
+      :key="post.id"
+      :id="post.id"
       :is-admin="isAdmin"
-      thumbnail="https://www.humantrust.co.jp/wp-content/uploads/2019/03/047e142d419cf76ebd8218ce53d73a3b-1.jpg"
-      title="Hello there!"
-      preview-text="This my first Post!"
-    />
-    <PostPreview
-      id="2"
-      :is-admin="isAdmin"
-      thumbnail="https://www.humantrust.co.jp/wp-content/uploads/2019/03/047e142d419cf76ebd8218ce53d73a3b-1.jpg"
-      title="Hello there!"
-      preview-text="This my second Post!"
-    />
-    <PostPreview
-      id="3"
-      :is-admin="isAdmin"
-      thumbnail="https://www.humantrust.co.jp/wp-content/uploads/2019/03/047e142d419cf76ebd8218ce53d73a3b-1.jpg"
-      title="Hello there!"
-      preview-text="This my third Post!"
+      :thumbnail="post.thumbnail"
+      :title="post.title"
+      :preview-text="post.previewText"
     />
   </section>
 
@@ -28,6 +16,7 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'nuxt-property-decorator';
 import PostPreview from '~/components/Posts/PostPreview.vue';
+import {Post} from '~/classes/Post';
 
 @Component({
   components: {
@@ -37,6 +26,8 @@ import PostPreview from '~/components/Posts/PostPreview.vue';
 export default class Index extends Vue{
   @Prop({default: false})
   isAdmin!: Boolean
+  @Prop({required: true})
+  posts!: Array<Post>
 
 }
 </script>

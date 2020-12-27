@@ -16,8 +16,8 @@
 </template>
 
 <script lang="ts">
-import AppControlInput from '@/components/UI/AppControlInput'
-import AppButton from '@/components/UI/AppButton'
+import AppControlInput from '@/components/UI/AppControlInput.vue';
+import AppButton from '@/components/UI/AppButton.vue';
 import {Component, Vue} from 'nuxt-property-decorator';
 
 @Component({

@@ -1,7 +1,7 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">Title of the Post</h1>
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
         <div class="post-detail">Last updated on XXX</div>
         <div class="post-detail">Written by NAME</div>
@@ -15,6 +15,25 @@
     </section>
   </div>
 </template>
+
+<script lang="ts">
+
+import {Component, Vue} from 'nuxt-property-decorator';
+import {Context} from '@nuxt/types';
+import {Post} from '~/classes/Post';
+
+@Component({})
+export default class Index extends Vue {
+  asyncData(context: Context, callback: any) {
+    const post1: Post = new Post('1', 'First Post (ID: ' + context.route.params.id + ')', 'This is our first post!', 'https://www.humantrust.co.jp/wp-content/uploads/2019/03/047e142d419cf76ebd8218ce53d73a3b-1.jpg');
+    setTimeout(() => {
+      callback(null, {
+        loadedPost : post1
+      });
+    }, 1000);
+  }
+}
+</script>
 
 <style scoped>
 .single-post-page {
